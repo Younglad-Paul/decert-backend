@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const Users = require('./models/users');
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 
@@ -25,14 +27,13 @@ app.put('/user/:id', async (req, res) => {
     }
 });
 
-const hostname = '0.0.0.0';
 const port = process.env.PORT || 2024
 
 mongoose.connect('mongodb+srv://admin:young365@decertifyapi.t4juk70.mongodb.net/Node-API?retryWrites=true&w=majority', {
     // useNewUrlParser: true,
     // useUnifiedTopology: true,
 }).then(() => {
-    app.listen(port, hostname, () => {
+    app.listen(port, () => {
         console.log(`Listening on port ${port}`);
     });
 }).catch((error) => {
